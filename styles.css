@@ -1,0 +1,70 @@
+/* Google Russo One fonts */
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: wheat;
+    font-family: 'Russo One', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh !important;
+}
+
+.header {
+    text-align: center;
+    padding: 16px;
+    font-size: 5vw;
+}
+
+.page-container {
+    padding: 24px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.roundAnnouncer {
+    padding: 8px;
+    font-size: 2vw;
+    text-align: center;
+}
+
+.roundInfo {
+    padding: 8px;
+    margin: 24px 0;
+    font-size: 6vw;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 64px;
+}
+
+p {
+    font-size: 2vw;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+button {
+    border: 0;
+    border-radius: 12px;
+    background-color: #272727;
+    padding: 24px;
+    font-size: 8vw;
+}
+
+.footer {
+    text-align: center;
+    padding: 12px;
+    font-size: 2vw;
+}
