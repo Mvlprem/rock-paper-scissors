@@ -6,33 +6,38 @@ which is used to pick a choice for computer.
 */
 function getComputerChoice() {
     let randomNumber = (Math.random()*2).toFixed();
-    let computerChoices = [`rock`, `paper`, `scissor`];
+    let computerChoices = [{rock: `✊`}, {paper: `✋`}, {scissor: `✌`}];
     let randomChoice = computerChoices[randomNumber];
-    console.log(`Computer: `+randomChoice);
     return randomChoice;
 }
 
-/*
-This function prompts player to enter a choice,
-which matches aganist possible choices to see if there is.
-any typo or digits. If there is any the player is asked
-to enter again.
-
-choice is case-insensitive
-
-@returns player choice
-*/
-function getPlayerChoice() {
-    let promptBox = prompt(`Enter your choice: rock or paper or scissor`);
-    if (!promptBox.match(/^(rock|paper|scissor)$/i)){
-        alert (`Allowed choices : rock or paper or scissor`);
-        return getPlayerChoice();
-    } else { 
-        console.log(`Player: `+promptBox);
-        return promptBox.toLowerCase();
-    }
+//updates html with players selected signs
+function displaySelectedSigns(computerSign, playerSign){
+    const computer = document.querySelector(`.computerChoice`);
+    const player = document.querySelector(`.playerChoice`);
+    computer.textContent = computerSign;
+    player.textContent = playerSign;
 }
 
+/*
+on click gets both players choices and
+displays selected hand signs by calling 'displaySelectedSigns()'
+checks for round winner by calling 'playRound()'
+*/
+const button = document.querySelectorAll(`button`);
+button.forEach(button => button.addEventListener(`click`, (e) => {
+
+    let computer = getComputerChoice();
+    let computerChoice = Object.keys(computer).toString();
+    let computerHandSign = Object.values(computer);
+
+    let playerChoice = e.target.classList.value;
+    let playerHandSign = e.target.textContent;
+
+    displaySelectedSigns(computerHandSign, playerHandSign);
+    playRound(computerChoice, playerChoice);
+}));
+    
 /*
 variables to store win count
 */
@@ -107,5 +112,3 @@ function game(){
     }
 }
 
-// Runs the game
-game();
