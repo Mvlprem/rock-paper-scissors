@@ -11,12 +11,34 @@ function getComputerChoice() {
     return randomChoice;
 }
 
-//updates html with players selected signs
+/*
+updates html with players selected signs
+*/
 function displaySelectedSigns(computerSign, playerSign){
     const computer = document.querySelector(`.computerChoice`);
     const player = document.querySelector(`.playerChoice`);
     computer.textContent = computerSign;
     player.textContent = playerSign;
+}
+
+/*
+updates html with round results
+*/
+function displayRoundInfo(result, info){
+    const roundResult = document.querySelector(`.roundResult`);
+    const resultInfo = document.querySelector(`.resultInfo`);
+    roundResult.textContent = result;
+    resultInfo.textContent = info;
+}
+
+/*
+updates html with players score
+*/
+function updateScore(computer, player){
+    const playerScore = document.querySelector(`.playerScore`);
+    const computerScore = document.querySelector(`.computerScore`);
+    playerScore.textContent = player;
+    computerScore.textContent = computer;
 }
 
 /*
@@ -41,8 +63,8 @@ button.forEach(button => button.addEventListener(`click`, (e) => {
 /*
 variables to store win count
 */
-let computerWinCount = 0;
-let playerWinCount = 0;
+let computerScore = 0;
+let playerScore = 0;
 
 /*
 This function takes in both player choices and
@@ -52,42 +74,67 @@ checks for possible winner and updates their win count.
 @param playerChoice
 */
 function playRound(computerSelection, playerSelection){
+
+    let roundResult = undefined;
+    let resultInfo = undefined;
+
     switch(computerSelection){
         case `rock`:
             if (computerSelection ===`rock` && playerSelection === `paper`){
-                console.log(`Yay! Paper beats Rock`);
-                playerWinCount++;
-            }else if (computerSelection ===`rock` && playerSelection === `scissor`){
-                console.log(`Oh no! Scissor loses to Rock`);
-                computerWinCount++;
-            }else { console.log(`It\'s a Tie`) }
+                roundResult = `You won!`;
+                resultInfo = `Paper beats rock`;
+                playerScore++;
 
+            }else if (computerSelection ===`rock` && playerSelection === `scissor`){
+                roundResult = `You lost!`;
+                resultInfo = `Scissor is beaten by rock`;
+                computerScore++;
+
+            }else { 
+                roundResult = `It's a tie!`;
+                resultInfo = `Rock ties with rock`;
+            }
             break;
 
         case `paper`:
             if (computerSelection ===`paper` && playerSelection === `rock`){
-                console.log(`Oh no! Rock loses to Paper`);
-                computerWinCount++;
-            }else if (computerSelection ===`paper` && playerSelection === `scissor`){
-                console.log(`Yay! Scissor beats Paper`);
-                playerWinCount++;
-            }else { console.log(`It\'s a Tie`) }
+                roundResult = `You lost!`;
+                resultInfo = `Rock is beaten by paper`;
+                computerScore++;
 
+            }else if (computerSelection ===`paper` && playerSelection === `scissor`){
+                roundResult = `You won!`;
+                resultInfo = `Scissor beats paper`;
+                playerScore++;
+
+            }else { 
+                roundResult = `It's a tie!`;
+                resultInfo = `Paper ties with paper`;
+            }
             break;
 
         case `scissor`:
             if (computerSelection ===`scissor` && playerSelection === `paper`){
-                console.log(`Oh no! Paper loses to Scissor`);
-                computerWinCount++;
-            }else if (computerSelection ===`scissor` && playerSelection === `rock`){
-                console.log(`Yay! Rock beats Scissor`);
-                playerWinCount++;
-            }else { console.log(`It\'s a Tie`) }
+                roundResult = `You lost!`;
+                resultInfo = `Paper is beaten by scissor`;
+                computerScore++;
 
+            }else if (computerSelection ===`scissor` && playerSelection === `rock`){
+                roundResult = `You won!`;
+                resultInfo = `Rock beats scissor`;
+                playerScore++;
+
+            }else { 
+                roundResult = `It's a tie!`;
+                resultInfo = `Scissor ties with scissor`; 
+            }
             break;
 
         default: console.log(`Something went wrong, try contacting admin.`);
     }
+
+    displayRoundInfo(roundResult, resultInfo);
+    updateScore(computerScore, playerScore);
 }
 
 /*
