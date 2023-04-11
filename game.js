@@ -58,6 +58,7 @@ button.forEach(button => button.addEventListener(`click`, (e) => {
 
     displaySelectedSigns(computerHandSign, playerHandSign);
     playRound(computerChoice, playerChoice);
+    endGame();
 }));
     
 /*
@@ -138,24 +139,24 @@ function playRound(computerSelection, playerSelection){
 }
 
 /*
-This function keeps track of both players win count
-and loop over until whoever scores the first five points
-and ends the game announcing the winner
+whoever scores the first five points wins
+and the game ends announcing the result
 */
-function game(){
-    while (computerWinCount <5 || playerWinCount <5){
-        console.log(`Computer  ${computerWinCount}` + " : " + `Player  ${playerWinCount}`);
-        playRound(getComputerChoice(), getPlayerChoice());
-        console.log(``);
-        if (computerWinCount === 5){
-            console.log(`Computer  ${computerWinCount}` + " : " + `Player  ${playerWinCount}`);
-            console.log(`You Loose!`);
-            break;
-        }else if (playerWinCount === 5){
-            console.log(`Computer  ${computerWinCount}` + " : " + `Player  ${playerWinCount}`);
-            console.log(`You Won!`);
-            break;
-        }   
+function endGame(){
+
+    if (computerScore === 5){
+
+        setTimeout(function() {
+            alert(`You Loose!`);
+        },10)
+        location.reload();
+
+    }else if (playerScore === 5){
+
+        setTimeout(function() {
+            alert(`You Won!`);
+        },10)
+        location.reload();
     }
 }
 
